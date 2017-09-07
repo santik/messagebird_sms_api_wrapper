@@ -17,10 +17,11 @@ class JsonRequestBasedMessagesCreatorTest extends TestCase
             'originator' => 'originator',
             'message' => 'message',
         ];
-        $request = new Request(['data' => json_encode($data)]);
+        $request = $this->prophesize(Request::class);
+        $request->getContent()->willReturn(json_encode($data));
 
         $creator = new JsonRequestBasedMessagesCreator();
-        $messages = $creator->create($request);
+        $messages = $creator->create($request->reveal());
 
         $this->assertInternalType('array', $messages);
         $this->assertEquals(1, count($messages));
@@ -34,30 +35,15 @@ class JsonRequestBasedMessagesCreatorTest extends TestCase
             'originator' => 'originator',
             'message' => 'message message message message message message message message message message message message message message message message message message message message message message message message message message ',
         ];
-        $request = new Request(['data' => json_encode($data)]);
+        $request = $this->prophesize(Request::class);
+        $request->getContent()->willReturn(json_encode($data));
 
         $creator = new JsonRequestBasedMessagesCreator();
-        $messages = $creator->create($request);
+        $messages = $creator->create($request->reveal());
 
         $this->assertInternalType('array', $messages);
         $this->assertEquals(2, count($messages));
         $this->assertInstanceOf(Message::class, $messages[0]);
-    }
-
-    public function testCreate_withInCorrectRequestParameterKey_ShouldThrowException()
-    {
-        $data = [
-            'recipient' => 'recipient',
-            'originator' => 'originator',
-            'message' => 'message',
-        ];
-        $request = new Request(['INCORRECT' => json_encode($data)]);
-
-        $creator = new JsonRequestBasedMessagesCreator();
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        $creator->create($request);
     }
 
     /**
@@ -65,13 +51,14 @@ class JsonRequestBasedMessagesCreatorTest extends TestCase
      */
     public function testCreate_withIncorrectRequestParameters_ShouldThrowException($data, $expected)
     {
-        $request = new Request(['data' => json_encode($data)]);
+        $request = $this->prophesize(Request::class);
+        $request->getContent()->willReturn(json_encode($data));
 
         $creator = new JsonRequestBasedMessagesCreator();
 
         $this->expectException($expected);
 
-        $creator->create($request);
+        $creator->create($request->reveal());
     }
 
     public function wrongParameters()

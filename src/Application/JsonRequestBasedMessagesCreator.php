@@ -18,7 +18,7 @@ class JsonRequestBasedMessagesCreator implements MessagesCreator
     {
         $this->guardData($data);
 
-        $data = json_decode($data->get('data'), true);
+        $data = json_decode($data->getContent(), true);
 
         $messageParts = $this->breakMessages($data['message']);
 
@@ -31,11 +31,14 @@ class JsonRequestBasedMessagesCreator implements MessagesCreator
         return $messages;
     }
 
+    /**
+     * @param Request $data
+     */
     private function guardData($data)
     {
         Assert::isInstanceOf($data, Request::class);
 
-        $data = $data->get('data');
+        $data = $data->getContent();
         Assert::notEmpty($data, 'data should be json inside "data" parameter');
 
         $data = json_decode($data, true);
