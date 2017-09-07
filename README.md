@@ -12,7 +12,7 @@ Run tests:
 
     ./vendor/bin/phpunit tests 
 
-To run application use build-in webserver:
+Run application using build-in webserver:
     
     cd examples
     php -S localhost:8000
