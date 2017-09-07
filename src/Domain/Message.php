@@ -6,7 +6,7 @@ namespace Santik\Sms\Domain;
 
 use Webmozart\Assert\Assert;
 
-class Message
+final class Message
 {
     const MAX_MESSAGE_LENGTH = 160;
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Santik\Sms\Application\MessagesCreator;
 use Santik\Sms\Domain\Message;
 
-class SmsSenderTest extends TestCase
+final class SmsSenderTest extends TestCase
 {
     public function testSend_WithCorrectParameters_ShouldCallMethodsFromDependencies()
     {

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Santik\Sms\Domain\Message;
 use Symfony\Component\HttpFoundation\Request;
 
-class JsonRequestBasedMessagesCreatorTest extends TestCase
+final class JsonRequestBasedMessagesCreatorTest extends TestCase
 {
     public function testCreate_withCorrectParameterForSingleMessage_ShouldReturnArrayWith1Message()
     {

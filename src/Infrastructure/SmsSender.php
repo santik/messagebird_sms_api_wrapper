@@ -6,7 +6,7 @@ namespace Santik\Sms\Infrastructure;
 
 use Santik\Sms\Application\MessagesCreator;
 
-class SmsSender
+final class SmsSender
 {
     private $messagesCreator;
 

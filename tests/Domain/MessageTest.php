@@ -6,7 +6,7 @@ namespace Santik\Sms\Domain;
 
 use PHPUnit\Framework\TestCase;
 
-class MessageTest extends TestCase
+final class MessageTest extends TestCase
 {
     public function testCreate_withCorrectParameters_ShouldReturnMessage()
     {

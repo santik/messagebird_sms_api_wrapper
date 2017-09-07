@@ -3,15 +3,24 @@
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 use MessageBird\Client;
+use Santik\Sms\Application\FileBasedThroughputLimitChecker;
 use Santik\Sms\Application\JsonRequestBasedMessagesCreator;
 use Santik\Sms\Infrastructure\MessageBirdBasedSmsClient;
 use Santik\Sms\Infrastructure\SmsSender;
 use Symfony\Component\HttpFoundation\Request;
 
-$mbKey = 'FaLrUQ5nBINSB1lgrQ7s7aztt';
+$mbKey = '*MB_KEY*';
 
 $messageBird = new Client($mbKey);
-$senderClient = new MessageBirdBasedSmsClient($messageBird);
+
+//here we assuming that we have only 1 client
+//if there will be multiple concurrent clients solution will not work
+//in case of multiple clients queueing should be used
+$filePath = dirname(__FILE__) . '/' . md5(FileBasedThroughputLimitChecker::class);
+$limitChecker = new FileBasedThroughputLimitChecker($filePath, 1);
+
+$senderClient = new MessageBirdBasedSmsClient($messageBird, $limitChecker);
+
 $messageCreator = new JsonRequestBasedMessagesCreator();
 
 $smsSender = new SmsSender($messageCreator, $senderClient);

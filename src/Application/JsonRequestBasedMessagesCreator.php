@@ -8,7 +8,7 @@ use Santik\Sms\Domain\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-class JsonRequestBasedMessagesCreator implements MessagesCreator
+final class JsonRequestBasedMessagesCreator implements MessagesCreator
 {
     /**
      * @param Request $data

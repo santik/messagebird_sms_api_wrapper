@@ -9,8 +9,9 @@ use MessageBird\Resources\Messages;
 use PHPUnit\Framework\TestCase;
 use Santik\Sms\Domain\Message;
 use MessageBird\Objects\Message as MbMessage;
+use Santik\Sms\Domain\ThroughputLimitChecker;
 
-class MessageBirdBasedSenderClientTest extends TestCase
+final class MessageBirdBasedSenderClientTest extends TestCase
 {
     public function testSend_WithCorrectParameters_ShouldCallClientSendMethod()
     {
@@ -31,7 +32,10 @@ class MessageBirdBasedSenderClientTest extends TestCase
         $client = $this->prophesize(Client::class);
         $client->messages = $messages->reveal();
 
-        $client = new MessageBirdBasedSmsClient($client->reveal());
+        $limitChecker = $this->prophesize(ThroughputLimitChecker::class);
+        $limitChecker->check()->willReturn(true);
+
+        $client = new MessageBirdBasedSmsClient($client->reveal(), $limitChecker->reveal());
         $client->send($domainMessage);
     }
 }
