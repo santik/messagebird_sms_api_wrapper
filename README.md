@@ -2,7 +2,7 @@
 
 Supports MessageBird API out of the box.
 
-To add support of another SMS provider (Twilio for Example) create implementation of `Santik\Sms\Infrastructure\SmsClient` interface. 
+To add support of another SMS provider (Twilio for example) create implementation of "Santik\Sms\Infrastructure\SmsClient" interface. 
 
 Install dependencies:
     

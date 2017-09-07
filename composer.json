@@ -1,5 +1,5 @@
 {
-    "name": "santik/messagebird_sms_api_wrapper",
+    "name": "santik/sms_api_wrapper",
     "description": "Library for sending SMS via messagebird api",
     "license": "proprietary",
     "authors": [
