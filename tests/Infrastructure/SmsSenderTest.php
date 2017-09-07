@@ -23,7 +23,7 @@ class SmsSenderTest extends TestCase
         $messagesCreator = $this->prophesize(MessagesCreator::class);
         $messagesCreator->create($data)->willReturn($domainMessages);
 
-        $client = $this->prophesize(SmsSenderClient::class);
+        $client = $this->prophesize(SmsClient::class);
         foreach ($domainMessages as $domainMessage) {
             $client->send($domainMessage)->shouldBeCalled();
         }

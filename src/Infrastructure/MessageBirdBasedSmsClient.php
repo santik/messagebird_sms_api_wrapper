@@ -8,7 +8,7 @@ use MessageBird\Client;
 use MessageBird\Objects\Message as MbMessage;
 use Santik\Sms\Domain\Message;
 
-class MessageBirdBasedSenderClient implements SmsSenderClient
+class MessageBirdBasedSmsClient implements SmsClient
 {
     private $client;
 

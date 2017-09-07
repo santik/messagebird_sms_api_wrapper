@@ -12,7 +12,7 @@ class SmsSender
 
     private $client;
 
-    public function __construct(MessagesCreator $messagesCreator, SmsSenderClient $client)
+    public function __construct(MessagesCreator $messagesCreator, SmsClient $client)
     {
         $this->messagesCreator = $messagesCreator;
         $this->client = $client;

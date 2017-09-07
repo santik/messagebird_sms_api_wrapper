@@ -31,7 +31,7 @@ class MessageBirdBasedSenderClientTest extends TestCase
         $client = $this->prophesize(Client::class);
         $client->messages = $messages->reveal();
 
-        $client = new MessageBirdBasedSenderClient($client->reveal());
+        $client = new MessageBirdBasedSmsClient($client->reveal());
         $client->send($domainMessage);
     }
 }
