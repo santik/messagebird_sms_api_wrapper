@@ -15,7 +15,7 @@ final class FileBasedThroughputLimitChecker implements ThroughputLimitChecker
     public function __construct(string $filePath, int $limit)
     {
         if (!is_writable($filePath)) {
-            throw new \Exception('Filepath ' . $filePath . ' should be writable');
+            throw new \Exception('Filepath ' . $filePath . ' should be writable. It is needed for throughput limits');
         }
         $this->filePath = $filePath;
         $this->limit = $limit;

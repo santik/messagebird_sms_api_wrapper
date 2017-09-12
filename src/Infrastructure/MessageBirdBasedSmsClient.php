@@ -67,7 +67,7 @@ final class MessageBirdBasedSmsClient implements SmsClient
         $combinedMessages = [];
         $reference = mt_rand(1,255);
         foreach ($messages as $i => $messagePart) {
-            $udh = $this->udhGenerator->generate($reference, count($messages), $i+1);
+            $udh = $this->udhGenerator->generate(count($messages), $i+1, $reference);
             $mbMessage = new MbMessage();
             $mbMessage->originator = $message->originator();
             $mbMessage->recipients = [$message->recipient()];

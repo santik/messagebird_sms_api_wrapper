@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 //put your MessageBird key here
-$mbKey = 'FaLrUQ5nBINSB1lgrQ7s7aztt';
+$mbKey = 'MB_KEY';
 
 try {
     $messageBird = new Client($mbKey);
