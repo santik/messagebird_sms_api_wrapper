@@ -14,7 +14,6 @@ Run tests:
 
 Run application using build-in webserver:
     
-    cd examples
     php -S localhost:8000
 
 Send POST request

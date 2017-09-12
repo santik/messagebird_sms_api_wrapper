@@ -6,8 +6,5 @@ use Santik\Sms\Domain\Message;
 
 interface MessagesCreator
 {
-    /**
-     * @return Message[]
-     */
-    public function create($data): array;
+    public function create($data): Message;
 }

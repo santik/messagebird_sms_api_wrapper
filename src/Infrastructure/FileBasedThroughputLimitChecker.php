@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Santik\Sms\Application;
+namespace Santik\Sms\Infrastructure;
 
 use Santik\Sms\Domain\ThroughputLimitChecker;
 

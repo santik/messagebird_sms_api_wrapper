@@ -20,15 +20,4 @@ final class MessageTest extends TestCase
         $this->assertEquals($originator, $object->originator());
         $this->assertEquals($message, $object->message());
     }
-
-    public function testCreate_withTooLongMessage_ShouldThrowException()
-    {
-        $recipient = 'recipient';
-        $originator = 'originator';
-        $tooLongMessage = 'message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message message ';
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        new Message($recipient, $originator, $tooLongMessage);
-    }
 }

@@ -21,29 +21,10 @@ final class JsonRequestBasedMessagesCreatorTest extends TestCase
         $request->getContent()->willReturn(json_encode($data));
 
         $creator = new JsonRequestBasedMessagesCreator();
-        $messages = $creator->create($request->reveal());
+        $message = $creator->create($request->reveal());
 
-        $this->assertInternalType('array', $messages);
-        $this->assertEquals(1, count($messages));
-        $this->assertInstanceOf(Message::class, $messages[0]);
-    }
-
-    public function testCreate_withCorrectParameterForMultipleMessages_ShouldReturnArrayWithMultipleMessages()
-    {
-        $data = [
-            'recipient' => 'recipient',
-            'originator' => 'originator',
-            'message' => 'message message message message message message message message message message message message message message message message message message message message message message message message message message ',
-        ];
-        $request = $this->prophesize(Request::class);
-        $request->getContent()->willReturn(json_encode($data));
-
-        $creator = new JsonRequestBasedMessagesCreator();
-        $messages = $creator->create($request->reveal());
-
-        $this->assertInternalType('array', $messages);
-        $this->assertEquals(2, count($messages));
-        $this->assertInstanceOf(Message::class, $messages[0]);
+        $this->assertInstanceOf(Message::class, $message);
+        $this->assertEquals(1, count($message->message()));
     }
 
     /**

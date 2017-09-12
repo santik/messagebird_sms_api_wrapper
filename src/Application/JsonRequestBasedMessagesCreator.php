@@ -12,23 +12,14 @@ final class JsonRequestBasedMessagesCreator implements MessagesCreator
 {
     /**
      * @param Request $data
-     * @return Message[]
      */
-    public function create($data): array
+    public function create($data): Message
     {
         $this->guardData($data);
 
         $data = json_decode($data->getContent(), true);
 
-        $messageParts = $this->breakMessages($data['message']);
-
-        $messages = [];
-
-        foreach ($messageParts as $messagePart) {
-            $messages[] = new Message($data['recipient'], $data['originator'], $messagePart);
-        }
-
-        return $messages;
+        return new Message($data['recipient'], $data['originator'], $data['message']);
     }
 
     /**
@@ -47,10 +38,5 @@ final class JsonRequestBasedMessagesCreator implements MessagesCreator
         Assert::keyExists($data, 'recipient');
         Assert::keyExists($data, 'originator');
         Assert::keyExists($data, 'message');
-    }
-
-    private function breakMessages(string $message): array
-    {
-        return str_split($message, Message::MAX_MESSAGE_LENGTH);
     }
 }

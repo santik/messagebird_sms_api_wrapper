@@ -1,6 +1,6 @@
 <?php
 
-namespace Santik\Sms\Infrastructure;
+namespace Santik\Sms\Application;
 
 use Santik\Sms\Domain\Message;
 

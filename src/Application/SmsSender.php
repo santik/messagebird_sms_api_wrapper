@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Santik\Sms\Infrastructure;
-
-use Santik\Sms\Application\MessagesCreator;
+namespace Santik\Sms\Application;
 
 final class SmsSender
 {
@@ -20,10 +18,8 @@ final class SmsSender
 
     public function send($data)
     {
-        $messages = $this->messagesCreator->create($data);
-
-        foreach ($messages as $message) {
-            $this->client->send($message);
-        }
+        $this->client->send(
+            $this->messagesCreator->create($data)
+        );
     }
 }

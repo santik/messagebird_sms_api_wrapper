@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Santik\Sms\Infrastructure;
+namespace Santik\Sms\Application;
 
 use PHPUnit\Framework\TestCase;
-use Santik\Sms\Application\MessagesCreator;
 use Santik\Sms\Domain\Message;
 
 final class SmsSenderTest extends TestCase
@@ -14,19 +13,13 @@ final class SmsSenderTest extends TestCase
     {
         $data = 'some data';
 
-        $domainMessages = [
-            new Message('some', 'another', 'foo'),
-            new Message('some', 'another', 'foo'),
-            new Message('some', 'another', 'foo'),
-        ];
+        $domainMessage = new Message('some', 'another', 'message');
 
         $messagesCreator = $this->prophesize(MessagesCreator::class);
-        $messagesCreator->create($data)->willReturn($domainMessages);
+        $messagesCreator->create($data)->willReturn($domainMessage);
 
         $client = $this->prophesize(SmsClient::class);
-        foreach ($domainMessages as $domainMessage) {
-            $client->send($domainMessage)->shouldBeCalled();
-        }
+        $client->send($domainMessage)->shouldBeCalled();
 
         $sender = new SmsSender($messagesCreator->reveal(), $client->reveal());
 
